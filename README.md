@@ -21,3 +21,14 @@ By taking advantage of the `render_block` filter we are modifying the block mark
 The background color logic has been extended to support images, both on Column and Columns, with some extra options for the responsive behavior for the image positioning.
 
 Concerning the responsive behavior, we have used the "Stack on mobile" option as controller for a new custom Media Query input that can also be controlled globally with a custom filter called `gfc_default_query`.
+
+## How it works
+
+The plugin generates a new section in the block sidebar called "Structure". By default Flexbox mode is selected, which replicates WordPress core styling.
+
+Other options available are:
+
+* "Fixed grid", based on a standard column based grid,
+* "Fluid grid", that allows you to switch between the `auto-fit` and `auto-fill` mode for a more flexible solution.
+
+Once you have enabled one of the two Grid options, you can control the sizing of the individual column within the Column block sidebar: you'll be able to choose the size, expressed in column units, and the horizontal shift value, also expressed in column units.
