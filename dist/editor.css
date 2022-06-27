@@ -1,0 +1,94 @@
+.wp-block-columns[data-use-gfc="1"] {
+  --gfc-columns-gap: 2em;
+  --gfc-gap: var(--gfc-columns-gap,var(--wp--style--block-gap,2em));
+  display: grid !important;
+  grid-template-columns: repeat(var(--gfc-grid-auto, var(--gfc-cols, 2)), minmax(min(var(--gfc-col-min-width, 100px), 100%), 1fr)) !important;
+  -moz-column-gap: var(--gfc-gap) !important;
+       column-gap: var(--gfc-gap) !important;
+  row-gap: var(--gfc-rows-gap, var(--gfc-columns-gap)) !important;
+  margin-bottom: var(--gfc-columns-gap, 1em) !important;
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+}
+.wp-block-columns[data-use-gfc="1"] .components-placeholder {
+  grid-column-start: 1;
+  grid-column-end: calc(var(--gfc-cols) + 1);
+}
+.wp-block-columns[data-use-gfc="1"] > *:not(.gfc-bg-helper) {
+  z-index: 1;
+}
+.wp-block-columns[data-use-gfc="1"][data-show-grid="1"] {
+  --gfc-overlay-color: rgba(255, 0, 0, 0.1);
+  --gfc-overlay-col: calc( ( 100% - (var(--gfc-gap) * (var(--gfc-cols) - 1)) ) / var(--gfc-cols) );
+}
+.wp-block-columns[data-use-gfc="1"][data-show-grid="1"][data-fluid-logic=auto-fit] {
+  --gfc-overlay-col: calc( ( 100% - (var(--gfc-gap) * (var(--gfc-inner-blocks) - 1)) ) / var(--gfc-inner-blocks) );
+}
+.wp-block-columns[data-use-gfc="1"][data-show-grid="1"]::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: var(--gfc-delta-l, 0);
+  right: var(--gfc-delta-r, 0);
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+  mix-blend-mode: difference;
+  background: repeating-linear-gradient(to right, var(--gfc-overlay-color) 0, var(--gfc-overlay-color) var(--gfc-overlay-col), transparent var(--gfc-overlay-col), transparent calc(var(--gfc-overlay-col) + var(--gfc-gap)));
+}
+.wp-block-columns[data-use-gfc="1"] > .wp-block-column {
+  --gfc-shift: calc(
+  	( 100% + var(--gfc-columns-gap,var(--wp--style--block-gap,2em)) ) / ( var(--gfc-col) + var(--gfc-col-shift,0) )
+  	* var(--gfc-col-shift,0)
+  );
+  width: 100%;
+  max-width: none;
+  grid-column: span calc(var(--gfc-col) + var(--gfc-col-shift, 0)) !important;
+  margin-left: var(--gfc-shift, 0) !important;
+}
+.wp-block-columns[data-use-gfc="1"] > .wp-block-column > *:not(.gfc-bg-helper) {
+  z-index: 1;
+}
+.wp-block-columns[data-use-gfc="1"] > .wp-block-column > .gfc-bg-helper::before {
+  background: var(--gfc-col-bg);
+}
+.wp-block-columns[data-use-gfc="1"] > .wp-block-column > .gfc-bg-helper::after {
+  background: var(--gfc-col-overlay-color);
+  opacity: var(--gfc-col-overlay-opacity);
+}
+.wp-block-columns[data-use-gfc="1"] > .wp-block-column .block-list-appender {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.wp-block-columns[data-use-gfc="1"] > .gfc-bg-helper::before, .wp-block-columns[data-use-gfc="1"] > .gfc-bg-helper::after {
+  border-radius: calc(var(--gfc-cols-border-radius) - var(--gfc-cols-border-width));
+}
+.wp-block-columns[data-use-gfc="1"] > .gfc-bg-helper::before {
+  background: var(--gfc-cols-bg);
+}
+.wp-block-columns[data-use-gfc="1"] > .gfc-bg-helper::after {
+  background: var(--gfc-cols-overlay-color);
+  opacity: var(--gfc-cols-overlay-opacity);
+}
+
+.gfc-bg-helper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.gfc-bg-helper::before, .gfc-bg-helper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wp-block-column .block-list-appender {
+  align-self: center;
+  line-height: inherit;
+  list-style: none;
+  position: relative;
+  right: auto;
+}

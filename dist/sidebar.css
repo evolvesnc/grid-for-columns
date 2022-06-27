@@ -1,0 +1,23 @@
+.gfc-inline-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.gfc-control-help {
+  font-size: 12px;
+  font-style: normal;
+  color: #757575;
+  margin-top: 8px !important;
+}
+
+.gfc-panel .components-button + .components-focal-point-picker-control {
+  margin-top: 1em;
+}
+
+.gfc-components-base-control {
+  margin-bottom: 24px;
+}
+.gfc-components-base-control .components-base-control {
+  margin-bottom: 0;
+}
